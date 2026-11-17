@@ -1,0 +1,261 @@
+/* Tillsatskoll – färgprofil "Lime": mörkt som standard, ljust läge finns.
+   Använd alltid variablerna nedan, aldrig hårdkodade färger. */
+:root {
+  --bg: #0B0D0C;
+  --yta: #17191A;
+  --yta2: #232625;
+  --kant: #2C302E;
+  --text: #F2F3EF;
+  --text2: #9BA19A;
+  --lime: #C6F432;
+  --lime-text: #0B0D0C;
+  --lime-mjuk: rgba(198, 244, 50, 0.14);
+  --lime-lank: #C6F432;
+  --obs: #FFB020;
+  --obs-text: #0B0D0C;
+  --obs-mjuk: rgba(255, 176, 32, 0.16);
+  --obs-kod: #FFC65C;
+  --ok-mjuk: rgba(61, 220, 132, 0.14);
+  --ok-kod: #6BE7A2;
+  --okand-mjuk: rgba(155, 161, 154, 0.16);
+  --fel: #F2B8B5;
+  --glas: rgba(255, 255, 255, 0.12);
+  --meny: rgba(40, 44, 42, 0.88);
+  --skugga: 0 8px 30px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="morkt"]) {
+    --bg: #F4F5F0; --yta: #FFFFFF; --yta2: #E9EBE4; --kant: #DADDD3;
+    --text: #0B0D0C; --text2: #5B6159;
+    --lime-lank: #3F6B00; --lime-mjuk: rgba(120, 170, 0, 0.14);
+    --obs-mjuk: rgba(255, 176, 32, 0.22); --obs-kod: #8A5300;
+    --ok-mjuk: rgba(46, 125, 79, 0.12); --ok-kod: #1E6A45;
+    --okand-mjuk: rgba(91, 97, 89, 0.12);
+    --fel: #B3261E;
+    --meny: rgba(255, 255, 255, 0.9); --skugga: 0 8px 30px rgba(0, 0, 0, 0.12);
+    color-scheme: light;
+  }
+}
+:root[data-theme="ljust"] {
+  --bg: #F4F5F0; --yta: #FFFFFF; --yta2: #E9EBE4; --kant: #DADDD3;
+  --text: #0B0D0C; --text2: #5B6159;
+  --lime-lank: #3F6B00; --lime-mjuk: rgba(120, 170, 0, 0.14);
+  --obs-mjuk: rgba(255, 176, 32, 0.22); --obs-kod: #8A5300;
+  --ok-mjuk: rgba(46, 125, 79, 0.12); --ok-kod: #1E6A45;
+  --okand-mjuk: rgba(91, 97, 89, 0.12);
+  --fel: #B3261E;
+  --meny: rgba(255, 255, 255, 0.9); --skugga: 0 8px 30px rgba(0, 0, 0, 0.12);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); }
+body {
+  font: 16px/1.45 Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+a { color: var(--lime-lank); text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.mono { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+[hidden] { display: none !important; }
+
+/* Vyer */
+.vy {
+  min-height: 100%;
+  padding: calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 112px);
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ---------- Skanna ---------- */
+.vy-kamera {
+  position: fixed; inset: 0; max-width: none; padding: 0; overflow: hidden;
+  background: #1C201E; color: #F2F3EF;
+}
+#kamera { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.glas { background: rgba(255, 255, 255, 0.12); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); color: #F2F3EF; border: 0; }
+.kamera-topp {
+  position: absolute; left: 16px; right: 16px; top: calc(env(safe-area-inset-top) + 14px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logga { padding: 10px 16px; border-radius: 999px; font-weight: 700; letter-spacing: -0.2px; }
+.rund { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; }
+.ram { position: absolute; left: 50%; top: 38%; width: min(300px, 78vw); height: 190px; transform: translate(-50%, -50%); }
+.ram i { position: absolute; width: 46px; height: 46px; border: 0 solid #C6F432; }
+.ram i:nth-child(1) { left: 0; top: 0; border-width: 5px 0 0 5px; border-top-left-radius: 26px; }
+.ram i:nth-child(2) { right: 0; top: 0; border-width: 5px 5px 0 0; border-top-right-radius: 26px; }
+.ram i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 5px 5px; border-bottom-left-radius: 26px; }
+.ram i:nth-child(4) { right: 0; bottom: 0; border-width: 0 5px 5px 0; border-bottom-right-radius: 26px; }
+.ram b { position: absolute; left: 24px; right: 24px; top: 50%; height: 3px; border-radius: 2px; background: #C6F432; box-shadow: 0 0 18px #C6F432; animation: svep 2.2s ease-in-out infinite; }
+@keyframes svep { 0%, 100% { transform: translateY(-60px); } 50% { transform: translateY(60px); } }
+@media (prefers-reduced-motion: reduce) { .ram b { animation: none; } }
+.hint {
+  position: absolute; left: 50%; top: calc(38% + 120px); transform: translateX(-50%);
+  margin: 0; padding: 10px 16px; border-radius: 999px; font-weight: 500; white-space: nowrap;
+}
+.kamera-fel {
+  position: absolute; left: 16px; right: 16px; top: calc(38% + 110px);
+  background: #121413; border-radius: 24px; padding: 16px; text-align: center;
+}
+.kamera-fel p { margin: 0 0 12px; color: #F2F3EF; }
+.senast {
+  position: absolute; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom) + 108px);
+  max-width: 536px; margin: 0 auto;
+  padding: 14px; border-radius: 28px; background: #121413; color: #F2F3EF;
+  display: flex; align-items: center; gap: 14px;
+}
+.senast .merke { width: 52px; height: 52px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; font-weight: 800; }
+.senast .merke b { font-size: 22px; }
+.senast .merke small { font-size: 10px; font-weight: 700; }
+.senast .text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.senast .etikett { font-size: 12px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: #9BA19A; }
+.senast .namn { font-size: 17px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.senast .info { font-size: 14px; color: #9BA19A; }
+
+/* Inmatning av streckkod (ark nerifrån) */
+.ark {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: var(--yta); color: var(--text); border-radius: 28px 28px 0 0;
+  padding: 20px 16px calc(env(safe-area-inset-bottom) + 20px);
+  display: flex; flex-direction: column; gap: 10px; box-shadow: var(--skugga);
+}
+#form-ean label { font-weight: 700; font-size: 18px; }
+#form-ean input {
+  height: 56px; border-radius: 18px; border: 1.5px solid var(--kant); background: var(--bg); color: var(--text);
+  padding: 0 16px; font: 600 20px "Geist Mono", ui-monospace, monospace; letter-spacing: 1px;
+}
+#form-ean input:focus { outline: 2px solid var(--lime); outline-offset: 1px; }
+.ark-knappar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fel { margin: 0; min-height: 1.2em; color: var(--fel); font-size: 14px; }
+
+/* Knappar */
+.knapp-lime, .knapp-sekundar {
+  min-height: 52px; border-radius: 26px; border: 0; padding: 0 20px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-weight: 700; font-size: 16px;
+}
+.knapp-lime { background: var(--lime); color: var(--lime-text); }
+.knapp-lime:disabled { opacity: .5; cursor: default; }
+.knapp-sekundar { background: var(--yta2); color: var(--text); }
+.tillbaka {
+  width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--yta); color: var(--text);
+  display: grid; place-items: center; flex: none;
+}
+
+/* ---------- Produkt ---------- */
+.rubrik { padding: 0 4px; display: flex; flex-direction: column; gap: 2px; }
+.rubrik h1 { margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; overflow-wrap: anywhere; }
+.rubrik p { margin: 0; font-size: 15px; color: var(--text2); }
+.bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ruta { border-radius: 26px; padding: 16px 18px; background: var(--yta); display: flex; flex-direction: column; gap: 2px; }
+.ruta.stor { height: 112px; justify-content: space-between; }
+.ruta.stor b { font-size: 52px; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+.ruta.stor span { font-size: 15px; font-weight: 600; }
+.ruta.lime { background: var(--lime); color: var(--lime-text); }
+.ruta.obs { background: var(--obs); color: var(--obs-text); }
+.ruta.bred { grid-column: span 2; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+.ruta.bred b { font-size: 18px; }
+.ruta.bred small { font-size: 14px; color: var(--text2); }
+.nova { display: flex; gap: 5px; }
+.nova span { width: 26px; height: 10px; border-radius: 5px; background: var(--yta2); }
+.nova span.pa { background: var(--obs); }
+.nova.lag span.pa { background: var(--ok-kod); }
+.notis { border-radius: 22px; padding: 14px 16px; display: flex; gap: 12px; background: var(--yta); color: var(--text2); font-size: 15px; }
+.notis svg { color: var(--text2); }
+.notis.obs { background: transparent; border: 1.5px solid var(--obs); color: var(--text); }
+.notis.obs svg { color: var(--obs); }
+.notis p { margin: 0; }
+
+.lista { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.rad {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 10px; min-height: 60px;
+  border-radius: 20px; background: var(--yta); color: var(--text);
+}
+.kod {
+  width: 68px; flex: none; padding: 10px 0; text-align: center; border-radius: 14px;
+  font: 700 15px "Geist Mono", ui-monospace, monospace;
+}
+.kod.obs { background: var(--obs-mjuk); color: var(--obs-kod); }
+.kod.ok { background: var(--ok-mjuk); color: var(--ok-kod); }
+.kod.okand { background: var(--okand-mjuk); color: var(--text2); }
+.rad .text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.rad .namn { font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rad .info { font-size: 13px; color: var(--text2); }
+.rad > svg { color: var(--text2); width: 18px; height: 18px; }
+.mittre { text-align: center; color: var(--text2); padding: 24px 8px; }
+details.ingredienser { background: var(--yta); border-radius: 20px; padding: 14px 16px; }
+details.ingredienser summary { font-weight: 600; cursor: pointer; }
+details.ingredienser p { margin: 10px 0 0; color: var(--text2); font-size: 15px; }
+.kalla { font-size: 13px; color: var(--text2); text-align: center; margin: 0; }
+
+/* ---------- Tillsats ---------- */
+.tillsats-topp { padding: 0 4px; display: flex; flex-direction: column; gap: 8px; }
+.tillsats-topp .rad1 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tillsats-topp .stor-kod { font: 700 64px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: -3px; }
+.tillsats-topp h1 { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: -.4px; }
+.status { padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.status.obs { background: var(--obs); color: var(--obs-text); }
+.status.ok { background: var(--ok-mjuk); color: var(--ok-kod); }
+.etikett { font-size: 12px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--text2); }
+.ruta p { margin: 0; font-size: 16px; line-height: 1.45; }
+.ruta .stycke { display: flex; flex-direction: column; gap: 4px; }
+.ruta.text { gap: 12px; }
+.ruta .varde { font-size: 16px; font-weight: 600; }
+
+/* ---------- Saknas ---------- */
+.saknas-kort { background: var(--yta); border-radius: 28px; padding: 24px 20px; display: flex; flex-direction: column; gap: 12px; }
+.saknas-kort .ikon { width: 60px; height: 60px; border-radius: 20px; background: var(--lime-mjuk); color: var(--lime-lank); display: grid; place-items: center; }
+.saknas-kort .ikon svg { width: 30px; height: 30px; }
+.saknas-kort h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.8px; line-height: 1.15; }
+.saknas-kort p { margin: 0; color: var(--text2); }
+.tips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tips div { background: var(--yta); border-radius: 20px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; line-height: 1.3; }
+.tips .mono { font-size: 13px; color: var(--lime-lank); }
+.lank-mitt { text-align: center; font-weight: 600; padding: 12px 0; }
+
+/* ---------- Historik och lexikon ---------- */
+.sidhuvud { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 4px 0; }
+.sidhuvud h1 { margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -1px; }
+.tema { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 0; background: var(--yta); color: var(--text); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.tema svg { width: 18px; height: 18px; }
+.sok {
+  height: 52px; border-radius: 26px; border: 1.5px solid var(--kant); background: var(--yta); color: var(--text);
+  padding: 0 18px; font: inherit; font-size: 16px; width: 100%;
+}
+.sok:focus { outline: 2px solid var(--lime); outline-offset: 1px; }
+.merke-liten { padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.merke-liten.obs { background: var(--obs-mjuk); color: var(--obs-kod); }
+.merke-liten.ok { background: var(--ok-mjuk); color: var(--ok-kod); }
+.lank-knapp { background: none; border: 0; color: var(--text2); font-size: 14px; padding: 12px; align-self: center; text-decoration: underline; }
+
+/* Laddar */
+.laddar { display: grid; place-items: center; min-height: 60vh; color: var(--text2); }
+.snurra { width: 36px; height: 36px; border-radius: 50%; border: 4px solid var(--yta2); border-top-color: var(--lime); animation: snurr 0.8s linear infinite; margin: 0 auto 12px; }
+@keyframes snurr { to { transform: rotate(360deg); } }
+
+/* ---------- Meny ---------- */
+#flikar {
+  position: fixed; z-index: 4; left: 50%; transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom) + 16px);
+  width: min(310px, calc(100% - 80px)); height: 66px; border-radius: 33px;
+  background: var(--meny); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); box-shadow: var(--skugga);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 8px;
+}
+body.kamera-aktiv #flikar { background: rgba(40, 44, 42, 0.88); }
+#flikar a {
+  height: 50px; min-width: 50px; border-radius: 25px; color: var(--text);
+  display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 700;
+}
+body.kamera-aktiv #flikar a { color: #F2F3EF; }
+#flikar a span { display: none; }
+#flikar a.aktiv { background: var(--lime); color: #0B0D0C; padding: 0 18px; }
+#flikar a.aktiv span { display: inline; }
+#flikar a svg { width: 22px; height: 22px; }
+body.ark-oppet #flikar { display: none; }
